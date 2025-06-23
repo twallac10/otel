@@ -17,6 +17,8 @@ jobs:
       pull-requests: write
     steps:
       - uses: plengauer/Thoth/actions/instrument/deploy@v5.16.5
+        with:
+          dry_run: true
         env:
           OTEL_EXPORTER_OTLP_ENDPOINT: '${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}'
           OTEL_EXPORTER_OTLP_HEADERS: '${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}'
