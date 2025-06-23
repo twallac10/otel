@@ -1,0 +1,37 @@
+name: Basic Workflow
+
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
+
+jobs:
+    job-one:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step 1 - Print Hello
+              run: echo "Hello from Job One - Step 1"
+            - name: Step 2 - Show Date
+              run: date
+            - name: Step 3 - Show Working Directory
+              run: pwd
+            - name: Step 4 - List Files
+              run: ls -la
+            - name: Step 5 - Print Goodbye
+              run: echo "Goodbye from Job One - Step 5"
+
+    job-two:
+        runs-on: ubuntu-latest
+        needs: job-one
+        steps:
+            - name: Step 1 - Print Hello
+              run: echo "Hello from Job Two - Step 1"
+            - name: Step 2 - Show Uptime
+              run: uptime
+            - name: Step 3 - Show Environment Variables
+              run: env
+            - name: Step 4 - Print Current User
+              run: whoami
+            - name: Step 5 - Print Goodbye
+              run: echo "Goodbye from Job Two - Step 5"
