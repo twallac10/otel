@@ -16,7 +16,7 @@ jobs:
       actions: write
       pull-requests: write
     steps:
-      - uses: plengauer/Thoth/actions/instrument/deploy@v5.16.5
+      - uses: plengauer/Thoth/actions/instrument/deploy@v5.20.0
         with:
           action_repository: plengauer/Thoth
           dry_run: false
