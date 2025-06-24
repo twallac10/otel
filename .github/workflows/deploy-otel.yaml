@@ -18,7 +18,6 @@ jobs:
     steps:
       - uses: plengauer/Thoth/actions/instrument/deploy@v5.16.5
         with:
-          dry_run: true
           action_repository: plengauer/Thoth
         env:
           OTEL_EXPORTER_OTLP_ENDPOINT: '${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}'
