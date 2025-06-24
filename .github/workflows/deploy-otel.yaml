@@ -1,21 +1,25 @@
 name: 'Deploy OpenTelemetry'
-
 on:
   workflow_dispatch:
   push:
-    branches: 
-     - main
+    branches:
+      - main
     paths:
       - .github/workflows/**
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: write
+      actions: read
       pull-requests: write
     steps:
+      - uses: plengauer/Thoth/actions/instrument/job@v5.20.0
+        env:
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
+          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+        with:
+          secrets_to_redact: '["${{ github.token }}","${{ secrets.GH_TOKEN }}","${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}","${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}"]'
       - uses: plengauer/Thoth/actions/instrument/deploy@v5.20.0
         with:
           action_repository: plengauer/Thoth
