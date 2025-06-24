@@ -21,9 +21,12 @@ jobs:
         run: date
       - name: Step 3 - Show Working Directory
         run: pwd
-      - name: Step 4 - List Files
+      - uses: syntaqx/setup-kustomize@v1
+        with:
+          kustomize-version: 5.4.3
+      - name: Step 5 - List Files
         run: ls -la
-      - name: Step 5 - Print Goodbye
+      - name: Step 6 - Print Goodbye
         run: echo "Goodbye from Job One - Step 5"
     permissions:
       actions: read
