@@ -23,7 +23,7 @@ jobs:
         run: pwd
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          persist-credentials: false
       - uses: syntaqx/setup-kustomize@v1
         with:
           kustomize-version: 5.4.3
