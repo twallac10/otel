@@ -11,12 +11,6 @@ jobs:
     job-one:
         runs-on: ubuntu-latest
         steps:
-             - uses: plengauer/opentelemetry-github/actions/instrument/job@v5.16.0
-               with:
-                 secrets_to_redact: ${{ toJSON(secrets) }}
-               env:
-                 OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
-                 OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
              - name: Step 1 - Print Hello
                run: echo "Hello from Job One - Step 1"
              - name: Step 2 - Show Date
@@ -32,12 +26,6 @@ jobs:
         runs-on: ubuntu-latest
         needs: job-one
         steps:
-            - uses: plengauer/opentelemetry-github/actions/instrument/job@v5.16.0
-              with:
-                secrets_to_redact: ${{ toJSON(secrets) }}
-              env:
-                OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
-                OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
             - name: Step 1 - Print Hello
               run: echo "Hello from Job Two - Step 1"
             - name: Step 2 - Show Uptime
