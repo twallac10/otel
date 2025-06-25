@@ -5,16 +5,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: plengauer/Thoth/actions/instrument/job@v5.20.0
+        env:
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
+          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+        with:
+          secrets_to_redact: '["${{ github.token }}"]'
       - name: Checkout code
         uses: actions/checkout@v2
-
       # Use an action to install kustomize
       - uses: syntaqx/setup-kustomize@v1
         with:
-          kustomize-version: 5.4.3  # Specify the version of kustomize you want to install
-
+          kustomize-version: 5.4.3 # Specify the version of kustomize you want to install
       - name: Display current time, file and directory structure
-        run: |
+        run: |-
           echo "Current time: $(date)"
           echo "Current directory structure:"
           ls -la
@@ -24,3 +28,5 @@ jobs:
           find . -type d  | sed 's|^\./||' | sort | sed 's|^|  |'
           echo "Current environment variables:"
           printenv | sort | sed 's|^|  |'
+    permissions:
+      actions: read
