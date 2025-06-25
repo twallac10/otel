@@ -15,6 +15,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: plengauer/Thoth/actions/instrument/deploy@v5.20.0
+        with:
+          github_token: ${{ secrets.GH_TOKEN}}
+          action_repository: plengauer/Thoth
         env:
           OTEL_EXPORTER_OTLP_ENDPOINT: '${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}'
           OTEL_EXPORTER_OTLP_HEADERS: '${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}'
