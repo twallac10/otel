@@ -2,18 +2,6 @@
 name: Basic Workflow
 on: [push, pull_request, workflow_dispatch]
 jobs:
-  otel:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: plengauer/Thoth/actions/instrument/workflow@v5.20.0
-        with:
-          self_monitoring: false
-          github_token: ${{ secrets.GH_TOKEN }}
-        env:
-          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
-          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
-    permissions:
-      actions: read
   build:
     runs-on: ubuntu-latest
     steps:
@@ -23,6 +11,7 @@ jobs:
           OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
         with:
           secrets_to_redact: '["${{ github.token }}"]'
+          github_token: ${{ secrets.GH_TOKEN }}
       - name: Checkout code
         uses: actions/checkout@v2
       # Use an action to install kustomize
