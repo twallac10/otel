@@ -5,10 +5,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: plengauer/Thoth/actions/instrument/job@@v5.20.0
+      - uses: plengauer/Thoth/actions/instrument/job@v5.20.0
         env:
           OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
           OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+          OTEL_SERVICE_NAME: "${{ github.event_name }}-${{ github.workflow }}"
         with:
           secrets_to_redact: '["${{ github.token }}"]'
           github_token: ${{ secrets.GH_TOKEN }}
