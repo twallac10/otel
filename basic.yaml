@@ -1,0 +1,26 @@
+# Generate a GitHub workflow that checksout the code, install kustomize and displays the current time, file and directory structure.
+name: Basic Workflow
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Use an action to install kustomize
+      - uses: syntaqx/kustomize-action@v1
+        with:
+          kustomize-version: 5.4.3  # Specify the version of kustomize you want to install
+
+      - name: Display current time, file and directory structure
+        run: |
+          echo "Current time: $(date)"
+          echo "Current directory structure:"
+          ls -la
+          echo "Current file structure:"
+          find . -type f  | sed 's|^\./||' | sort | sed 's|^|  |'
+          echo "Current directory structure:"
+          find . -type d  | sed 's|^\./||' | sort | sed 's|^|  |'
+          echo "Current environment variables:"
+          printenv | sort | sed 's|^|  |'
