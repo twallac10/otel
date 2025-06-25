@@ -1,6 +1,6 @@
 # Generate a GitHub workflow that checksout the code, install kustomize and displays the current time, file and directory structure.
 name: Basic Workflow
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
