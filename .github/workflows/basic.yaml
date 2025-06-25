@@ -5,7 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: plengauer/Thoth/actions/instrument/job@v5.20.0
+      - uses: plengauer/opentelemetry-github/actions/instrument/job@v5.20.0
         env:
           OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
           OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
@@ -17,7 +17,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false # Do not persist credentials to avoid using the token in the next steps
-          fetch-depth: 0 # Fetch all history for all branches and tags
       # Use an action to install kustomize
       - uses: syntaqx/setup-kustomize@v1
         with:
