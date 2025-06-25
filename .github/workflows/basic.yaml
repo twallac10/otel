@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v2
 
       # Use an action to install kustomize
-      - uses: syntaqx/kustomize-action@v1
+      - uses: syntaqx/setup-kustomize@v1
         with:
           kustomize-version: 5.4.3  # Specify the version of kustomize you want to install
 
