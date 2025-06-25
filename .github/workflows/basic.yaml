@@ -13,7 +13,10 @@ jobs:
           secrets_to_redact: '["${{ github.token }}"]'
           github_token: ${{ secrets.GH_TOKEN }}
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false # Do not persist credentials to avoid using the token in the next steps
+          fetch-depth: 0 # Fetch all history for all branches and tags
       # Use an action to install kustomize
       - uses: syntaqx/setup-kustomize@v1
         with:
