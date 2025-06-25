@@ -2,10 +2,17 @@
 name: Basic Workflow
 on: [push, pull_request, workflow_dispatch]
 jobs:
+  otel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: plengauer/Thoth/actions/instrument/workflow@v5.20.0
+        env:
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
+          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: plengauer/Thoth/actions/instrument/job@v5.16.5
+      - uses: plengauer/Thoth/actions/instrument/job@v5.20.0
         env:
           OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
           OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
