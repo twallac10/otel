@@ -16,3 +16,4 @@ jobs:
           otlpHeaders: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
           githubToken: ${{ secrets.GH_TOKEN }}
           runId: ${{ github.event.workflow_run.id }}
+          extraAttributes: "github.repository=${{ github.repository }},github.workflow=${{ github.workflow }},github.run_id=${{ github.run_id }},github.actor=${{ github.actor }},github.event_name=${{ github.event_name }},github.event_path=${{ github.event_path }}"
