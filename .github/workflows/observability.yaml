@@ -15,3 +15,4 @@ jobs:
           otlpEndpoint: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
           otlpHeaders: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
           githubToken: ${{ secrets.GH_TOKEN }}
+          runId: ${{ github.event.workflow_run.id }}
