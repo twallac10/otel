@@ -1,0 +1,16 @@
+on:
+  workflow_run:
+    workflows:
+      # The name of the workflow(s) that triggers the export
+      - "Basic Workflow"
+    types: [completed]
+
+jobs:
+  otel-cicd-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: corentinmusard/otel-cicd-action@v2
+        with:
+          otlpEndpoint: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
+          otlpHeaders: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+          githubToken: ${{ secrets.GH_TOKEN }}
