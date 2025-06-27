@@ -32,6 +32,11 @@ jobs:
     name: OpenTelemetry Export Trace
     runs-on: ubuntu-latest
     needs: [build] # must run when all jobs are completed
+    permissions:
+      contents: read # Required. To access the private repository
+      actions: read # Required. To read workflow runs
+      pull-requests: read # Optional. To read PR labels
+      checks: read # Optional. To read run annotations
     steps:
       - uses: corentinmusard/otel-cicd-action@v2
         with:
