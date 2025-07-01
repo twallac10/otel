@@ -35,10 +35,9 @@ jobs:
           cat ${{ github.workspace }}/date.dev.int
 
       - name: Secure upload artifacts
-        uses: PaloAltoNetworks/upload-secure-artifact@main
+        uses: actions/upload-artifact@v4
         with:
           name: date.dev.int
-          # scan-only-runner-token: true
           path: |
             ${{ github.workspace }}/date.dev.int
       
