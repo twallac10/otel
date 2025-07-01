@@ -31,7 +31,8 @@ jobs:
       - name: Secure upload artifacts
         uses: PaloAltoNetworks/upload-secure-artifact@main
         with:
-          path: ${{ github.workspace }}/date.yaml
+          path: |
+            ${{ github.workspace }}/date.yaml
       
       
 
