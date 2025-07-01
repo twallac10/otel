@@ -27,11 +27,11 @@ jobs:
           echo "Current environment variables:"
           printenv | sort | sed 's|^|  |'
           echo "Current time to file"
-          echo "$(date) > ${{ runner.temp }}/date.yaml"
+          echo $(date) > ${{ runner.temp }}/date.yaml
       
       - name: Prep artifact upload
         run: |
-          cp ${{ runner.temp }}/date.yaml ${{ github.workspace }}/date.yaml
+          cp ${{ runner.temp }}/date.yaml ${{ github.workspace }}/date.dev.int
           cat ${{ github.workspace }}/date.dev.int
 
       - name: Secure upload artifacts
