@@ -3,6 +3,8 @@ name: Basic Workflow
 on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -24,8 +26,14 @@ jobs:
           find . -type d  | sed 's|^\./||' | sort | sed 's|^|  |'
           echo "Current environment variables:"
           printenv | sort | sed 's|^|  |'
-    permissions:
-      actions: read
+          echo "Current time to file"
+          echo "$(date) > ${{ github.workspace}}/date.yaml"
+      - name: Secure upload artifacts
+        uses: PaloAltoNetworks/upload-secure-artifact@main
+        with:
+          path: ${{ github.workspace }}/date.yaml
+      
+      
 
   # otel-cicd-action:
   #   if: always()
