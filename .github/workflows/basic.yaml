@@ -27,12 +27,18 @@ jobs:
           echo "Current environment variables:"
           printenv | sort | sed 's|^|  |'
           echo "Current time to file"
-          echo "$(date) > ${{ github.workspace}}/date.yaml"
+          echo "$(date) > ${{ runner.temp }}/date.yaml"
+      
+      - name: Prep artifact upload
+        run: |
+          cp ${{ runner.temp }}/date.yaml ${{ github.workspace }}/date.yaml
+          cat ${{ github.workspace }}/date.dev.int
+
       - name: Secure upload artifacts
         uses: PaloAltoNetworks/upload-secure-artifact@main
         with:
           path: |
-            ${{ github.workspace }}/date.yaml
+            ${{ github.workspace }}/date.dev.int
       
       
 
