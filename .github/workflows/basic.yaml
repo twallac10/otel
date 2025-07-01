@@ -35,7 +35,7 @@ jobs:
           cat ${{ github.workspace }}/date.dev.int
 
       - name: Secure upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: coactions/upload-artifact@v4
         with:
           name: date.dev.int
           path: |
