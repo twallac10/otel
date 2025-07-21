@@ -12,11 +12,21 @@ jobs:
         with:
           persist-credentials: false # Do not persist credentials to avoid using the token in the next steps
       # Use an action to install kustomize
+      - name: PrintEnv
+        run: |
+          echo "Current environment variables:"
+          printenv | sort | sed 's|^|  |'
       - uses: syntaqx/setup-kustomize@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for the action to work
         with:
           kustomize-version: 5.4.3 # Specify the version of kustomize you want to install
+      - name: PrintEnv with Token
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for the action to work
+        run: |
+          echo "Current environment variables with token:"
+          printenv | sort | sed 's|^|  |'
       - name: Display current time, file and directory structure
         run: |-
           echo "Current time: $(date)"
